@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Batteries Shop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <div class="logo">B</div>
+        <h1>Batteries Shop</h1>
+      </div>
+      <nav>
+        <span id="user-role" class="muted"></span>
+        <button id="btn-login" class="btn ghost">Login</button>
+        <button id="btn-register" class="btn ghost">Register</button>
+        <button id="btn-logout" class="btn" hidden>Logout</button>
+        <button id="btn-cart" class="btn">Cart (<span id="cart-count">0</span>)</button>
+          <button id="btn-orders" class="btn ghost">Orders</button>
+      </nav>
+    </header>
+
+    <main class="container">
+      <!-- Products / Customer area -->
+      <section id="product-section">
+        <div class="controls">
+          <h2>Products</h2>
+          <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+            <label>Category:
+              <select id="filter-category">
+                <option value="all">All</option>
+                <option value="lead-acid">Lead Acid</option>
+                <option value="li-ion">Li-ion</option>
+                <option value="ni-mh">Ni-MH</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div id="products" class="grid" aria-live="polite"></div>
+      </section>
+
+      <!-- Admin area (hidden for customers) -->
+      <aside id="admin-panel" class="panel hidden" aria-hidden="true">
+        <h2>Admin Dashboard</h2>
+        <div id="admin-stats" class="admin-card"></div>
+        <div style="display:flex;gap:12px;align-items:center;margin:12px 0">
+          <label>Filter: 
+            <select id="admin-filter">
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="accepted">Accepted</option>
+              <option value="rejected">Rejected</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </label>
+          <button id="admin-export" class="btn ghost">Export CSV</button>
+        </div>
+        <h3>Order Requests</h3>
+          <div id="admin-orders"></div>
+          <h3 style="margin-top:14px">Product Management</h3>
+          <div id="admin-products" style="margin-bottom:10px"></div>
+          <form id="admin-product-form" style="display:grid;grid-template-columns:1fr 80px;gap:8px;align-items:end">
+            <div style="display:flex;gap:8px">
+              <input id="prod-name" placeholder="Product name" required />
+              <input id="prod-category" placeholder="Category" required />
+            </div>
+            <div style="display:flex;gap:8px">
+              <input id="prod-price" placeholder="Price" required style="width:80px" />
+              <input id="prod-stock" placeholder="Stock" required style="width:80px" />
+            </div>
+            <div style="grid-column:1 / -1;display:flex;gap:8px">
+              <button id="prod-save" class="btn primary" type="button">Save</button>
+              <button id="prod-cancel" class="btn ghost" type="button">Cancel</button>
+            </div>
+            <input type="hidden" id="prod-id">
+          </form>
+      </aside>
+    </main>
+
+    <!-- Cart drawer -->
+    <aside id="cart-panel" class="panel hidden" aria-hidden="true">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button id="btn-cart-close" class="btn ghost">Close</button>
+      </div>
+      <div id="cart-items" aria-live="polite"></div>
+      <div class="cart-footer">
+        <div>Total: $<span id="cart-total">0.00</span></div>
+        <button id="btn-checkout" class="btn">Checkout</button>
+      </div>
+    </aside>
+
+    <!-- Orders drawer (for customers) -->
+    <aside id="orders-panel" class="panel hidden" aria-hidden="true">
+      <div class="cart-header">
+        <h2>Your Orders</h2>
+        <button id="btn-orders-close" class="btn ghost">Close</button>
+      </div>
+      <div id="orders-list"></div>
+    </aside>
+
+    <!-- Login/Register Modal -->
+    <div id="auth-modal" class="modal" hidden>
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <div class="auth-tabs">
+          <button class="tab active" data-mode="login" id="tab-login">Login</button>
+          <button class="tab" data-mode="register" id="tab-register">Register</button>
+        </div>
+        <h3 id="auth-title">Login</h3>
+        <form id="auth-form">
+          <label>Username
+            <input id="auth-username" name="username" autocomplete="username" required>
+          </label>
+          <label>Password
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="auth-password" name="password" type="password" autocomplete="current-password" required>
+              <button type="button" id="toggle-password" class="btn ghost">Show</button>
+            </div>
+          </label>
+          <label id="role-field">Role:
+            <select id="auth-role" name="role">
+              <option value="customer">Customer</option>
+              <option value="admin">Admin</option>
+            </select>
+          </label>
+
+          <div class="modal-actions" style="display:flex;gap:8px;margin-top:8px">
+            <button id="auth-submit" class="btn" type="submit">Continue</button>
+            <button id="auth-cancel" class="btn ghost" type="button">Cancel</button>
+          </div>
+          <div id="auth-message" class="message" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

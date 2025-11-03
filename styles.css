@@ -1,0 +1,137 @@
+/* Batteries Shop - Colorful Responsive Styles (mobile-first)
+   Designed to match the existing HTML structure in index.html
+   - Mobile-first layout
+   - Accessible color contrasts
+   - Responsive grid and panels
+   - Smooth transitions and focus states
+*/
+
+:root{
+  --bg:#0f172a; /* dark navy */
+  --surface:#0b1220; /* slightly lighter */
+  --card:#0f172a;
+  --muted:#9aa4b2;
+  --accent:#06b6d4; /* teal */
+  --accent-2:#7c3aed; /* purple */
+  --glass: rgba(255,255,255,0.04);
+  --success:#10b981; /* green */
+  --danger:#ef4444; /* red */
+  --radius:12px;
+  --max-width:1100px;
+  --text:#e6eef7;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,#071028 0%, #071834 60%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.35;
+}
+
+.container{max-width:var(--max-width);margin:18px auto;padding:16px;display:flex;gap:18px;align-items:flex-start}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:80;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03);padding:12px 18px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:56px;height:56px;border-radius:12px;display:inline-grid;place-items:center;font-weight:800;font-size:20px;color:#051025;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 8px 30px rgba(7,18,52,0.6)}
+.site-header h1{margin:0;font-size:18px;color:var(--text)}
+.site-header nav{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
+.btn:focus{outline:3px solid rgba(6,182,212,0.16);outline-offset:2px}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#0ea5a3);color:#031523}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+.btn.warn{background:linear-gradient(90deg,#ffb020,#ff7a18);color:#051025}
+
+/* Controls area */
+.controls{display:flex;gap:12px;align-items:center;width:100%}
+.controls h2{margin:0;color:var(--text)}
+.controls select,input{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:8px;border-radius:8px}
+
+/* Products grid */
+#products{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:14px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6);display:flex;flex-direction:column}
+.card h4{margin:0 0 6px;color:var(--text)}
+.thumb{height:120px;border-radius:10px;background:linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.08));display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;margin-bottom:10px}
+.meta{color:var(--muted);font-size:13px}
+.price{color:var(--accent);font-weight:800;margin-top:8px}
+.card .actions{margin-top:auto;display:flex;gap:8px;align-items:center}
+.card input.qty{width:72px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.card button.add{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#031523;padding:8px 10px;border-radius:10px;border:none;font-weight:700}
+
+/* Cart / Panels - right side on larger screens */
+.panel{position:fixed;right:18px;top:88px;width:340px;max-width:92vw;background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:12px;box-shadow:0 16px 60px rgba(2,6,23,0.7);z-index:70}
+.panel.hidden{display:none}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#cart-items{max-height:56vh;overflow:auto;padding-right:6px}
+.cart-item{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.cart-item .name{flex:1;color:var(--text)}
+.cart-item .cart-controls{display:flex;gap:8px;align-items:center}
+.cart-item input.cart-qty{width:64px;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)}
+.cart-item button.remove{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--danger);padding:6px;border-radius:8px}
+.cart-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+
+/* Orders panel (customers) */
+.order-card{padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03));margin-bottom:10px}
+.order-status{font-weight:800;margin-top:8px;color:var(--accent-2)}
+.order-item{font-size:13px;color:var(--muted);margin-left:6px}
+.order-history{margin-top:8px;font-size:13px;color:var(--muted)}
+
+/* Admin panel inside main layout */
+#admin-panel{position:static;width:320px;background:transparent;padding:8px}
+.admin-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;margin-bottom:10px}
+#admin-orders .card{padding:10px}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.6));z-index:140}
+.modal.hidden{display:none}
+.modal-content{min-width:320px;max-width:460px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;box-shadow:0 20px 80px rgba(2,6,23,0.7)}
+.auth-tabs{display:flex;gap:8px;margin-bottom:12px}
+.auth-tabs .tab{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);font-weight:700}
+.auth-tabs .tab.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#02121a}
+.modal-content input, .modal-content select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);margin-top:6px}
+.modal-actions{display:flex;gap:10px;margin-top:10px}
+.message{color:var(--danger);min-height:20px;margin-top:6px}
+
+/* Utility */
+.hidden{display:none}
+.small{font-size:13px;color:var(--muted)}
+.center{text-align:center}
+
+/* Responsive rules */
+@media(min-width:720px){
+  .container{padding:20px}
+  #products{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:980px){
+  .container{display:flex}
+  #products{grid-template-columns:repeat(4,1fr)}
+  /* move panels to right side */
+  main .container{padding-right:380px}
+  #admin-panel{position:fixed;right:380px;top:98px}
+}
+
+@media(min-width:1200px){
+  #products{grid-template-columns:repeat(4,1fr)}
+  .logo{width:64px;height:64px;font-size:22px}
+}
+
+/* Accessibility helpers */
+.btn:focus-visible{outline:3px solid rgba(124,58,237,0.18);outline-offset:2px}
+
+/* Small tweaks for very small screens */
+@media(max-width:480px){
+  .logo{width:48px;height:48px}
+  #products{grid-template-columns:repeat(2,1fr)}
+  .card{padding:12px}
+  .modal-content{margin:12px}
+}
+
+/* end of stylesheet */
